@@ -8,20 +8,21 @@ fill.addEventListener("click", async () => {
 
 })
 function FindMe() {
-    document.querySelector('input[name="dimensions.weight"]').value = 31
-    document.querySelector('input[name="dimensions.width"]').value = 32
-    document.querySelector('input[name="dimensions.length"]').value = 33
-    document.querySelector('input[name="dimensions.height"]').value = 34
+    document.querySelector('input[name="dimensions.weight"]').value = 0.3  
+    document.querySelector('input[name="dimensions.width"]').value = 30
+    document.querySelector('input[name="dimensions.length"]').value = 35
+    document.querySelector('input[name="dimensions.height"]').value = 6
+    document.querySelector('input[name="Размерная сетка"]').value = RU
     const inputEvent = new Event('input', {
         bubbles: true,
     })
-    const barCode = document.querySelector('input[name="barcode"]').value
-    document.querySelector('input[name="vendorCode"]').value = barCode
-    document.querySelector('input[name="vendorCode"]').dispatchEvent(inputEvent)
+    const vendorCode = document.querySelector('input[name="vendorCode"]').value
+    document.querySelector('input[name="groupId"]').value = vendorCode
+    document.querySelector('input[name="groupId"]').dispatchEvent(inputEvent)
     document.querySelector('input[name="dimensions.weight"]').dispatchEvent(inputEvent)
     document.querySelector('input[name="dimensions.width"]').dispatchEvent(inputEvent)
     document.querySelector('input[name="dimensions.length"]').dispatchEvent(inputEvent)
     document.querySelector('input[name="dimensions.height"]').dispatchEvent(inputEvent)
-
+    document.querySelector('input[name="Размерная сетка"]').dispatchEvent(inputEvent)
     
 }
