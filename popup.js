@@ -12,7 +12,7 @@ function FindMe() {
     document.querySelector('input[name="dimensions.width"]').value = 30
     document.querySelector('input[name="dimensions.length"]').value = 35
     document.querySelector('input[name="dimensions.height"]').value = 6
-    document.querySelector('input[name="Размерная сетка"]').value = RU
+    document.querySelector('input[name="Размерная сетка"]').value = "RU"
     const inputEvent = new Event('input', {
         bubbles: true,
     })
