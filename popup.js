@@ -4,6 +4,7 @@ const df = document.getElementById("df")
 const ff = document.getElementById("ff")
 const trunk = document.getElementById("trunk")
 const shirt = document.getElementById("shirt")
+const mysound = new Audio('/audio/sound.mp3')
 short.addEventListener("click", async () => { 
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.executeScript({
@@ -61,6 +62,9 @@ function Shirt() {
     const inputEvent = new Event('input', {
         bubbles: true,
     })
+    const changeEvent = new Event('change', {
+        bubbles: true,
+    })
     const vendorCode = document.querySelector('input[name="vendorCode"]').value
     document.querySelector('input[name="groupId"]').value = vendorCode
     document.querySelector('input[name="groupId"]').dispatchEvent(inputEvent)
@@ -73,7 +77,7 @@ function Shirt() {
     const inweb = document.querySelectorAll('.___inner___Rgdkj')[15]
 
     web.querySelector('*:first-child').value = "RU"
-    web.querySelector('*:first-child').dispatchEvent(inputEvent)
+    web.querySelector('*:first-child').dispatchEvent(changeEvent)
 
     const regex = /(\d{1,2}(-\d{1,2})?) размер/g;
 
@@ -87,7 +91,7 @@ function Shirt() {
     const Num = matches.map(number => number.replace('-', '/'));
 
     inweb.querySelector('*:first-child').value = Num[0]
-    inweb.querySelector('*:first-child').dispatchEvent(inputEvent)
+    inweb.querySelector('*:first-child').dispatchEvent(changeEvent)
     
 }
 
@@ -206,11 +210,14 @@ function DF() {
 }
 
 function Short() {
-    document.querySelector('input[name="dimensions.weight"]').value = 0.3  
+    document.querySelector('input[name="dimensions.weight"]').value = 0.3
     document.querySelector('input[name="dimensions.width"]').value = 30
     document.querySelector('input[name="dimensions.length"]').value = 35
     document.querySelector('input[name="dimensions.height"]').value = 6
     const inputEvent = new Event('input', {
+        bubbles: true,
+    })
+    const changeEvent = new Event('change', {
         bubbles: true,
     })
     const vendorCode = document.querySelector('input[name="vendorCode"]').value
@@ -224,8 +231,11 @@ function Short() {
     const web = document.querySelectorAll('.___inner___Rgdkj')[14]
     const inweb = document.querySelectorAll('.___inner___Rgdkj')[15]
 
+    web.click()
     web.querySelector('*:first-child').value = "RU"
-    web.querySelector('*:first-child').dispatchEvent(inputEvent)
+    web.querySelector('*:first-child').dispatchEvent(changeEvent)
+    document.querySelector('[data-label="RU"]').click()
+    web.querySelector('*:first-child').setAttribute('aria-selected', 'true')
 
     const regex = /(\d{1,2}(-\d{1,2})?) размер/g;
 
@@ -233,14 +243,21 @@ function Short() {
     let match;
     
     while ((match = regex.exec(document.querySelector('input[name="name"]').value)) !== null) {
-      matches.push(match[0].replace(" размер", ""));
+        matches.push(match[0].replace(" размер", ""));
     }
 
     const Num = matches.map(number => number.replace('-', '/'));
 
+    inweb.click()
     inweb.querySelector('*:first-child').value = Num[0]
-    inweb.querySelector('*:first-child').dispatchEvent(inputEvent)
-    
+    inweb.querySelector('*:first-child').dispatchEvent(changeEvent)
+    document.querySelector(`[data-label="${Num[0]}"]`).click()
+    inweb.querySelector('*:first-child').setAttribute('aria-selected', 'true')
+    document.addEventListener('DOMContentLoaded', function () {
+        var audio = new Audio()
+        audio.src = chrome.runtime.getURL('/audio/sound.mp3')
+        audio.play()
+    })
 }
 
 function Long() {
